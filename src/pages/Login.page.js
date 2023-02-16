@@ -4,6 +4,7 @@ import { validateEmail } from '../utils/validateEmail';
 import { PAGES } from '../constants';
 import { Logo, FormRow, Modal } from '../components';
 import Wrapper from '../styles/styled/Login.styled';
+import '../styles/login.css';
 
 const initialState = {
   name: '',
@@ -33,29 +34,17 @@ const Login = ({ setPage }) => {
     e.preventDefault();
     const { name, email, password } = values;
 
-
+    setNameError(false);
     if (!name) {
       const msg = 'Please enter your name';
       handleError(msg, setNameError);
-    } else {
-      setNameError(false);
-    }
-
-    if (!email || validateEmail(email)) {
+    } else if (!email || validateEmail(email)) {
       const msg = 'Please enter a valid email';
       handleError(msg, setEmailError);
-    } else {
-      setEmailError(false);
-    }
-
-
-    if (!password) {
+    } else if (!password) {
       const msg = 'Please enter a password';
       handleError(msg, setPasswordError);
-    } else {
-      setPasswordError(false);
     }
-
 
     const validUser = users.find((user) => user.name === name && user.email === email && user.password === password);
 
@@ -83,9 +72,7 @@ const Login = ({ setPage }) => {
 
   return (
     <Wrapper className='full-page'>
-      <form className='form' onSubmit={onSubmit}>
-        <Logo />
-        {/* name field */}
+      <form onSubmit={onSubmit}>
         <FormRow
           error={nameError}
           type='text'
@@ -109,10 +96,10 @@ const Login = ({ setPage }) => {
           value={values.password}
           handleChange={handleChange}
         />
-        <button type='submit' className='btn btn-block' disabled={isLoading}>
+        <button type='submit' disabled={isLoading}>
           {isLoading ? 'loading...' : 'Log In'}
         </button>
-        <button className='btn btn-block btn-light mt' onClick={() => setPage(landing)}>
+        <button onClick={() => setPage(landing)}>
           Back
         </button>
       </form>

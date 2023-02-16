@@ -109,7 +109,6 @@ html {
 }
 
 body {
-  background: var(--backgroundColor);
   font-family: var(--bodyFont);
   font-weight: 400;
   line-height: 1.75;
@@ -463,6 +462,7 @@ Modal
 }
 
 body {
+  background: url(../img/vote-intro.jpg) no-repeat center center/contain;
   display: flex;
   justify-content: center;
   align-items: center;
