@@ -1,5 +1,44 @@
-.vote-page {
+body {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.vote {
   width: 100vw;
   height: 100vh;
-  background-color: #333;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 2%;
+}
+
+.party-likud,
+.party-yeshatid,
+.party-haavoda,
+.party-merech {
+  width: 40%;
+  height: 40%;
+
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #BFBFBF;
+  background-color: white;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.party-likud{
+  background: url(../img/likud.jpg) no-repeat center center/contain;
+}
+
+.party-yeshatid{
+  background: url(../img/yesh_atid.jpg) no-repeat center center/contain;
+}
+
+.party-haavoda{
+  background: url(../img/haavoda.png) no-repeat center center/contain;
+}
+
+.party-merech{
+  background: url(../img/merech.jpg) no-repeat center center/contain;
 }
