@@ -7,12 +7,15 @@ import { Navbar, UsersList } from '../components';
 
 import data from '../data';
 
-const [landing] = PAGES;
-const userDate = JSON.parse(localStorage.getItem('userData'));
+const [landing, login, main, vote, admin] = PAGES;
+const userData = JSON.parse(localStorage.getItem('userData'));
 
 const Main = ({ setPage }) => {
-  const [user, setUser] = useState(userDate);
+  const [user, setUser] = useState(userData);
   const [users, setUsers] = useState(data);
+
+  
+
 
   useEffect(() => {
     if (!user) {

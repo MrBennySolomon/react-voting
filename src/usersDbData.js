@@ -273,3 +273,5 @@ export const users = [
     email: 'anna.johnson@gmail.com'
   }
 ];
+
+export default users;

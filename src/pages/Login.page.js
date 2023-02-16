@@ -1,8 +1,7 @@
 import { useState } from "react";
-
+import users from '../usersDbData';
 import { validateEmail } from '../utils/validateEmail';
 import { PAGES } from '../constants';
-
 import { Logo, FormRow, Modal } from '../components';
 import Wrapper from '../styles/styled/Login.styled';
 
@@ -12,7 +11,7 @@ const initialState = {
   password: '',
 };
 
-const [landing] = PAGES;
+const [landing, login, main, vote, admin] = PAGES;
 
 const Login = ({ setPage }) => {
   const [values, setValues] = useState(initialState);
@@ -32,10 +31,8 @@ const Login = ({ setPage }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    setIsLoading(true);
-
     const { name, email, password } = values;
+
 
     if (!name) {
       const msg = 'Please enter your name';
@@ -59,18 +56,15 @@ const Login = ({ setPage }) => {
       setPasswordError(false);
     }
 
-    if (!name ||
-      !email ||
-      validateEmail(email) ||
-      !password) {
-      setIsLoading(false);
-      return;
-    } else {
-      localStorage.setItem('userData', JSON.stringify(values));
 
-      setTimeout(() => {
-        window.location.reload(false);
-      }, 2000);
+    const validUser = users.find((user) => user.name === name && user.email === email && user.password === password);
+
+    if (!validUser) {
+      handleError('USER NOT FOUND', setNameError);
+    }else{
+      localStorage.setItem('userData', JSON.stringify(values));
+      setPage(vote);
+      
     }
   };
 

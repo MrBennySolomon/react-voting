@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { PAGES } from './constants';
 
-import { Main, Landing, Login } from './pages';
+import { Main, Landing, Login, Vote, Admin } from './pages';
 
 import './styles/App.css'
 
@@ -11,15 +11,15 @@ const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getI
 const App = () => {
   const [page, setPage] = useState('landing');
 
-  const [landing, login, main] = PAGES;
+  const [landing, login, main, vote, admin] = PAGES;
 
   useEffect(() => {
     if (!userData) {
       setPage(landing);
     } else {
-      setPage(main);
+      setPage(vote);
     }
-  }, [landing, main]);
+  }, [landing, vote]);
 
   switch (page) {
     case landing:
@@ -28,8 +28,12 @@ const App = () => {
       return <Login setPage={setPage} />;
     case main:
       return <Main setPage={setPage} />;
+    case vote:
+      return <Vote setPage={setPage} />;
+    case admin:
+      return <Admin setPage={setPage} />;
     default:
-      return <Landing setPage={setPage} />;
+      throw new Error('SWITCH CASE WENT WRONG');
   }
 };
 

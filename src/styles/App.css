@@ -453,3 +453,19 @@ Modal
   cursor: pointer;
   margin-top: 2rem;
 }
+
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
