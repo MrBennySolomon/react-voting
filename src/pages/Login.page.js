@@ -37,16 +37,16 @@ const Login = ({ setPage }) => {
     const { name, email, password } = values;
 
     setNameError(false);
-    if (!name) {
-      const msg = 'Please enter your name';
-      handleError(msg, setNameError);
-    } else if (!email || validateEmail(email)) {
-      const msg = 'Please enter a valid email';
-      handleError(msg, setEmailError);
-    } else if (!password) {
-      const msg = 'Please enter a password';
-      handleError(msg, setPasswordError);
-    }
+    // if (!name) {
+    //   const msg = 'Please enter your name';
+    //   handleError(msg, setNameError);
+    // } else if (!email || validateEmail(email)) {
+    //   const msg = 'Please enter a valid email';
+    //   handleError(msg, setEmailError);
+    // } else if (!password) {
+    //   const msg = 'Please enter a password';
+    //   handleError(msg, setPasswordError);
+    // }
 
     const validUser = users.find((user) => user.name === name && user.email === email && user.password === password);
 
@@ -74,6 +74,7 @@ const Login = ({ setPage }) => {
 
   return (
     <Wrapper className='full-page'>
+      <h1>Login Page</h1>
       <form onSubmit={onSubmit}>
         <FormRow
           error={nameError}

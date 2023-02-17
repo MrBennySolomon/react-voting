@@ -20,7 +20,7 @@ const Landing = ({ setPage }) => {
 
   return (
     <Wrapper>
-      <div className='flex'>
+      <div className='flex-intro'>
         <h1>VOTING APP</h1>
         <button onClick={() => setPage(login)}>
           VOTE
