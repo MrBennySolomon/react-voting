@@ -1,10 +1,9 @@
 import { PAGES } from '../constants';
 import users from '../data';
 import Wrapper from '../styles/styled/Landing.styled';
-import { Logo } from '../components';
 import '../styles/landing.css'
 
-const [landing, login, main, vote, admin] = PAGES;
+const [, login, , , ] = PAGES;
 
 const Landing = ({ setPage }) => {
   localStorage.setItem('users', JSON.stringify(users));
