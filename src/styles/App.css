@@ -453,19 +453,3 @@ Modal
   margin-top: 2rem;
 }
 
-.graph {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50vw;
-  height: 50vh;
-}
-
-body {
-  background: url(../img/vote-intro.jpg) no-repeat center center/contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}

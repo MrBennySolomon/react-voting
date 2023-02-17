@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Vote.css';
 import { PAGES } from '../constants';
 
 const Vote = ({ setPage }) => {
+  const [finish, setFinish] = useState(false);
   let isFinnishVoting = false;
   const [landing, login, main, vote, admin] = PAGES;
   const userData = JSON.parse(localStorage.getItem('userData'));
-  const voted = JSON.parse(localStorage.getItem('voted'));
+  let voted = JSON.parse(localStorage.getItem('voted'));
   // if ((voted.length === 0) || !(voted.find((name) => name === userData.name))) {
   //   const party = localStorage.getItem('Likud');
   //   voted.push(userData.name);
@@ -16,53 +17,80 @@ const Vote = ({ setPage }) => {
   //   console.log('YOU ALREADY VOTED');
   // }
 
+  const changeHandler = () => {
+    const votedArr = JSON.parse(localStorage.getItem('voted'));
+    voted = votedArr.find((user) => user.name === userData.name);
+    const party = localStorage.getItem(voted.party);
+    localStorage.setItem(voted.party, Number(party) - 1);
+    let newArray = votedArr.filter( (item) => {
+      if(item.name !== userData.name){
+           return item;
+      }
+    });
+    //localStorage.removeItem('voted');
+    localStorage.setItem('voted',newArray);
+    setFinish(false);
+  }
   const clickHandler = (e) => {
     if ((voted.length > 0) && (voted.find((name) => name === userData.name))) {
-      console.log('YOU ALREADY VOTED');
-      setPage(landing);
+      setFinish(true);
     }
     let party = '';
     switch(e.target.getAttribute('class')) {
       case 'party-likud':
         party = localStorage.getItem('Likud');
-        voted.push(userData.name);
+        voted = JSON.parse(localStorage.getItem('voted'));
+        voted.push({name: userData.name, party: 'Likud'});
         localStorage.setItem('Likud', Number(party) + 1);
         localStorage.setItem('voted', JSON.stringify(voted));
+        userData.type === 'admin' ? setPage(admin) : setFinish(true);
         break;
       case 'party-yeshatid':
         party = localStorage.getItem('YeshAtid');
-        voted.push(userData.name);
+        voted = JSON.parse(localStorage.getItem('voted'));
+        voted.push({name: userData.name, party: 'YeshAtid'});
         localStorage.setItem('YeshAtid', Number(party) + 1);
         localStorage.setItem('voted', JSON.stringify(voted));
+        userData.type === 'admin' ? setPage(admin) : setFinish(true);
         break;
       case 'party-haavoda':
         party = localStorage.getItem('Haavoda');
-        voted.push(userData.name);
+        voted = JSON.parse(localStorage.getItem('voted'));
+        voted.push({name: userData.name, party: 'Haavoda'});
         localStorage.setItem('Haavoda', Number(party) + 1);
         localStorage.setItem('voted', JSON.stringify(voted));
+        userData.type === 'admin' ? setPage(admin) : setFinish(true);
         break;
       case 'party-merech':
-        const party = localStorage.getItem('Merech');
-        voted.push(userData.name);
+        party = localStorage.getItem('Merech');
+        voted = JSON.parse(localStorage.getItem('voted'));
+        voted.push({name: userData.name, party: 'Merech'});
         localStorage.setItem('Merech', Number(party) + 1);
         localStorage.setItem('voted', JSON.stringify(voted));
+        userData.type === 'admin' ? setPage(admin) : setFinish(true);
         break;
       default:
         throw new Error('SOMETHING WENT WRONG VOTING SWITCH CASE');
         break;
     
+    }
   }
-  
+
   return (
-    <div className='vote'>
-      <button onClick={clickHandler} className='party-likud'></button>
-      <button onClick={clickHandler} className='party-yeshatid'></button>
-      <button onClick={clickHandler} className='party-haavoda'></button>
-      <button onClick={clickHandler} className='party-merech'></button>
-      {}
+    <div className='vote-div'>
+      <div className='cards'>
+        <button onClick={clickHandler} className='party-likud'></button>
+        <button onClick={clickHandler} className='party-yeshatid'></button>
+        <button onClick={clickHandler} className='party-haavoda'></button>
+        <button onClick={clickHandler} className='party-merech'></button>
+      </div>
+      <div className='buttons'>
+        <button onClick={() => setPage(landing)} className={finish ? 'done' : 'done hidden'}>DONE</button>
+        <button onClick={changeHandler} className={finish ? 'change' : 'change hidden'}>CHANGE VOTED</button>
+      </div>
+
     </div>
   )
-  }
 }
 
 export default Vote;

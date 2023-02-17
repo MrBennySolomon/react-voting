@@ -1,5 +1,5 @@
 import { PAGES } from '../constants';
-import users from '../usersDbData';
+import users from '../data';
 import Wrapper from '../styles/styled/Landing.styled';
 import { Logo } from '../components';
 import '../styles/landing.css'

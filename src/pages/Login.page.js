@@ -1,5 +1,5 @@
 import { useState } from "react";
-import users from '../usersDbData';
+import users from '../data';
 import { validateEmail } from '../utils/validateEmail';
 import { PAGES } from '../constants';
 import { Logo, FormRow, Modal } from '../components';
@@ -7,9 +7,11 @@ import Wrapper from '../styles/styled/Login.styled';
 import '../styles/login.css';
 
 const initialState = {
+  id: '',
   name: '',
   email: '',
   password: '',
+  type: ''
 };
 
 const [landing, login, main, vote, admin] = PAGES;
@@ -51,7 +53,7 @@ const Login = ({ setPage }) => {
     if (!validUser) {
       handleError('USER NOT FOUND', setNameError);
     }else{
-      localStorage.setItem('userData', JSON.stringify(values));
+      localStorage.setItem('userData', JSON.stringify(validUser));
       setPage(vote);
       
     }
